@@ -51,10 +51,11 @@ export async function get433(req, res){
 
 export async function addPlayer(req, res){
     const data = req.body
+    const { formation } = req.params
     const db = db_connect()
 
-    await db.collection('4-4-2')
-        .insertOne(data)
+    await db.collection(formation)
+        .updateOne({ _id: data._id }, { $set: { name: data.name, jersey: data.jersey }}, { upsert: true })
         .catch( err => {
             res.status(500).send(err)
             return
@@ -62,20 +63,22 @@ export async function addPlayer(req, res){
     res.status(201).send('player inserted')
 }
 
-export default async function updatePlayer(req, res){
+export async function updatePlayer(req, res){
     console.log('running function')
 
-    const {id} = req.params
+    const {_id} = req.params
     const {name, jersey} = req.body
 
     const db = db_connect()
     console.log('db connected')
 
     await db.collection('players')
-        .updateOne(
-            {_id: new ObjectId(id)},
-            { $set: {name, jersey}}
-        )
+
+    .updateOne({ _id }, { $set: { name, jersey }}, { upsert: true })
+        // .updateOne(
+        //     {_id: new ObjectId(id)},
+        //     { $set: {name, jersey}}
+        // )
         .then( () => getPlayers(req, res))  //get updated players
         .catch(err => console.log(err))
     res.status(200).send({ message: 'Player updated' });
