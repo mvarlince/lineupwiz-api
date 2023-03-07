@@ -26,11 +26,26 @@ export async function addFormation(req, res){
 
 export async function get442(req, res){
     const db = db_connect()
-
     const content = await db.collection('4-4-2')
-        .find()
+        .find({})
         .toArray()
+    res.send(content)
+}
 
+export async function get343(req, res){
+    const db = db_connect()
+    const content = await db.collection('3-4-3')
+        .find({})
+        .toArray()
+    res.send(content)
+}
+
+export async function get433(req, res){
+    const db = db_connect()
+
+    const content = await db.collection('4-3-3')
+        .find({})
+        .toArray()
     res.send(content)
 }
 
