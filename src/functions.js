@@ -24,11 +24,11 @@ export async function addFormation(req, res){
     res.status(201).send('formation inserted')
 }
 
-export async function getPlayers(req, res){
+export async function get442(req, res){
     const db = db_connect()
 
-    const content = await db.collection('players')
-        .find({})
+    const content = await db.collection('4-4-2')
+        .find()
         .toArray()
 
     res.send(content)
@@ -38,7 +38,7 @@ export async function addPlayer(req, res){
     const data = req.body
     const db = db_connect()
 
-    await db.collection('players')
+    await db.collection('4-4-2')
         .insertOne(data)
         .catch( err => {
             res.status(500).send(err)
@@ -61,22 +61,8 @@ export default async function updatePlayer(req, res){
             {_id: new ObjectId(id)},
             { $set: {name, jersey}}
         )
+        .then( () => getPlayers(req, res))  //get updated players
         .catch(err => console.log(err))
     res.status(200).send({ message: 'Player updated' });
     console.log('done')
 }
-
-
-// export async function getPlayersByFormation(req, res){
-//     const formation = req.body
-
-//     const db = db_connect()
-
-//     await db.collection('players')
-//         .find({})
-//         .then()
-//         .catch( err => {
-//             res.status(500).send(err)
-//             return
-//         })
-// }
