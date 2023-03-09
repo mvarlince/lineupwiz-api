@@ -12,12 +12,9 @@ app.get('/formations', getFormation)
 app.post('/formation', addFormation)
 
 app.post('/players/:formation', addPlayer)
+app.patch('/players/:formation/:_id', updatePlayer)
 
 app.get('/formation/:formation', getFormationByDoc)
 
-// app.get('/formation/:formationid', getFormationByDoc)
-// app.get('/players/433', get433)
-// app.get('/players/343', get343)
-app.patch('/players/:formation/:_id', updatePlayer)
 
 app.listen('4040', () => console.log('listening on port 4040'))     
