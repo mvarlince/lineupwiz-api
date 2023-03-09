@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import { addFormation, addPlayer, getFormation, updatePlayer, getFormationByDoc } from './src/functions.js'
+import 'dotenv/config'
 
 const app = express()
 app.use(cors())
