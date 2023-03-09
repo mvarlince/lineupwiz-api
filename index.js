@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { addFormation, addPlayer, getFormation, get433, updatePlayer, getFormationByDoc } from './src/functions.js'
+import { addFormation, addPlayer, getFormation, updatePlayer, getFormationByDoc } from './src/functions.js'
 
 const app = express()
 app.use(cors())
@@ -15,15 +15,8 @@ app.post('/players/:formation', addPlayer)
 
 app.get('/formation/:formation', getFormationByDoc)
 
-
-
-
-
-
-
-
 // app.get('/formation/:formationid', getFormationByDoc)
-app.get('/players/433', get433)
+// app.get('/players/433', get433)
 // app.get('/players/343', get343)
 app.patch('/players/:formation/:_id', updatePlayer)
 

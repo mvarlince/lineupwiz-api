@@ -33,30 +33,30 @@ export async function addFormation(req, res){
     res.status(201).send('formation inserted')
 }
 
-export async function get442(req, res){
-    const formation = req.params
-    const db = db_connect()
-    const content = await db.collection('442')
-        .find({})
-        .toArray()
-    res.send(content)
-}
+// export async function get442(req, res){
+//     const formation = req.params
+//     const db = db_connect()
+//     const content = await db.collection('442')
+//         .find({})
+//         .toArray()
+//     res.send(content)
+// }
 
-export async function get343(req, res){
-    const db = db_connect()
-    const content = await db.collection('343')
-        .find({})
-        .toArray()
-    res.send(content)
-}
+// export async function get343(req, res){
+//     const db = db_connect()
+//     const content = await db.collection('343')
+//         .find({})
+//         .toArray()
+//     res.send(content)
+// }
 
-export async function get433(req, res){
-    const db = db_connect()
-    const content = await db.collection('433')
-        .find({})
-        .toArray()
-    res.send(content)
-}
+// export async function get433(req, res){
+//     const db = db_connect()
+//     const content = await db.collection('433')
+//         .find({})
+//         .toArray()
+//     res.send(content)
+// }
 
 export async function addPlayer(req, res){
     const data = req.body
