@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { updatePlayer, addFormation, addPlayer, getFormation, get442, get433, get343 } from './src/functions.js'
+import { addFormation, addPlayer, getFormation, get433, updatePlayer, getFormationByDoc } from './src/functions.js'
 
 const app = express()
 app.use(cors())
@@ -8,15 +8,23 @@ app.use(express.json())
 
 app.get('/', (req, res) => res.send('Api working'))
 
-app.get('/formation', getFormation)
+app.get('/formations', getFormation)
 app.post('/formation', addFormation)
 
 app.post('/players/:formation', addPlayer)
 
-app.get('/players/442', get442)
+app.get('/formation/:formation', getFormationByDoc)
+
+
+
+
+
+
+
+
+// app.get('/formation/:formationid', getFormationByDoc)
 app.get('/players/433', get433)
-app.get('/players/343', get343)
-app.patch('/players/:_id', updatePlayer)
+// app.get('/players/343', get343)
+app.patch('/players/:formation/:_id', updatePlayer)
 
-
-app.listen('4040', () => console.log('listening on port 4040'))
+app.listen('4040', () => console.log('listening on port 4040'))     
