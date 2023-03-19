@@ -1,7 +1,10 @@
 import db_connect from "./dbConnect.js";
 
+// Establish a single database connection
+const db = db_connect();
+
 export async function getFormation(req, res) {
-    const db = db_connect()
+    console.log('dbconnect - getFormation')
     const content = await db.collection("formations")
         .find({})
         .toArray()
@@ -11,9 +14,9 @@ export async function getFormation(req, res) {
 
 export async function getFormationByDoc(req, res) {
     const { formation } = req.params
-    console.log('formation', formation)
+   // console.log('formation', formation)
 
-    const db = db_connect()
+    console.log('dbconnect - getFormationByDoc')
     const content = await db.collection(formation)
         .find({})
         .toArray()
@@ -23,7 +26,7 @@ export async function getFormationByDoc(req, res) {
 
 export async function addFormation(req, res) {
     const info = req.body
-    const db = db_connect()
+    console.log('dbconnect - addFormation')
     await db.collection('formations')
         .insertOne(info)
         .catch(err => {
@@ -36,7 +39,7 @@ export async function addFormation(req, res) {
 export async function addPlayer(req, res) {
     const data = req.body
     const { formation } = req.params
-    const db = db_connect()
+    console.log('dbconnect - addPlayer')
     await db.collection(formation)
         .updateOne({ _id: data._id }, { $set: { name: data.name, jersey: data.jersey } }, { upsert: true })
         .catch(err => {
@@ -47,13 +50,12 @@ export async function addPlayer(req, res) {
 }
 
 export async function updatePlayer(req, res) {
-    console.log('running function')
+    // console.log('running function')
 
     const { formation, _id } = req.params
     const { name, jersey } = req.body
 
-    const db = db_connect()
-    console.log('db connected')
+    console.log('dbconnect - updatePlayer')
 
     await db.collection(formation)
         .updateOne({ _id }, { $set: { name, jersey } }, { upsert: true })
